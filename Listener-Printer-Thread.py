@@ -12,8 +12,8 @@ class Listener(threading.Thread):
 		self.bus = can.interface.Bus("vcan0", bustype="socketcan_native")
 	def run(self): 
 		while not self.ende.isSet():
-			mesg=self.bus.recv()
-			print(mesg)
+			mesg=self.bus.recv(0)
+#			print(mesg)
 			q_logs.put(mesg)
 
 
@@ -22,25 +22,27 @@ class Printer(threading.Thread):
 		threading.Thread.__init__(self)
 		self.ende=end_flag
 		self.logfile = logfile
+		print(logfile)
 	def run(self): 
 		while not self.ende.isSet():
-			if not q_logs.empty():
+			while not q_logs.empty():
 				mesg=q_logs.get()
-			print(mesg)
-			self.logfile.write(mesg)
-			self.logfile.write("\n")
+#				print(mesg)
+				if mesg != None:
+					self.logfile.write(str(mesg))
+					self.logfile.write("\n")
 			
 if __name__ == '__main__':
 	end_Flag = threading.Event()
 	logs = open('test', 'w')
 	
 	Listen_Thread = Listener(end_Flag)
-	Print_Thread = Printer(end_Flag)
+	Print_Thread = Printer(logs,end_Flag)
 	
 	Listen_Thread.start()
 	Print_Thread.start()
 	
-	time.sleep(5)
+	time.sleep(10)
 	end_Flag.set()	
 	Print_Thread.join()
-	self.logfile.close()
+	logs.close()
