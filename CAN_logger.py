@@ -32,6 +32,7 @@ class Printer(threading.Thread):
 					self.logfile.write(str(mesg))
 					self.logfile.write("\n")
 			
+"""
 if __name__ == '__main__':
 	end_Flag = threading.Event()
 	logs = open('test', 'w')
@@ -46,3 +47,4 @@ if __name__ == '__main__':
 	end_Flag.set()	
 	Print_Thread.join()
 	logs.close()
+"""
