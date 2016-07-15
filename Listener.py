@@ -9,7 +9,6 @@ class Listener(threading.Thread):
 	def __init__(self, end_flag):
 		threading.Thread.__init__(self)
 		self.ende=end_flag
-		self.logfile = logfile
 		self.bus = can.interface.Bus("vcan0", bustype="socketcan_native")
 	def run(self): 
 		while not self.ende.isSet():
