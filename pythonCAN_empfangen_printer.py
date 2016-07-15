@@ -13,9 +13,10 @@ class myPrinter(can.Listener):
 		self.logfile=open_file
    
 	def on_message_received(self, msg):
+		start=time.time()
 		self.logfile.write(str(msg))
 		self.logfile.write("\n")
-		print(msg)
+		print(time.time()-start)
 
 	def __del__(self):
 		self.logfile.close()
@@ -28,7 +29,7 @@ def ende():
 	time.sleep(1)
 	print("Schliessen")
 
-logfile_path = os.path.join('/home/pi/datalogger/virtual/myrepo/Probieren2/logfiles', time.strftime('%Y%m%d-%H%M'))
+logfile_path = os.path.join('/home/pi/datalogger/virtual/logfiles', time.strftime('%Y%m%d-%H%M'))
 logfile = open(logfile_path, 'w')   
 
 bus = can.interface.Bus(can_channel, bustype="socketcan_native")
