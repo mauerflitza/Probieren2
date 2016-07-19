@@ -46,11 +46,12 @@ class csvPrinter(threading.Thread):
 				if msg != None:
 					arg_list = [msg.timestamp, msg.arbitration_id, msg.dlc, msg.data]
 					print (msg.data)
-					row = ','.join([msg.timestamp,
+					row = ','.join(map(str,([msg.timestamp,
                         msg.arbitration_id,
-                        msg.flags,
                         msg.dlc,
-                        msg.data])
+                        msg.data[0],
+			msg.data[1]
+			])))
 					self.logfile.write(row + "\n")
 			
 
