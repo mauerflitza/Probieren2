@@ -44,7 +44,7 @@ class csvPrinter(threading.Thread):
 				msg=q_logs.get()
 #				print(mesg)
 				if msg != None:
-					arg_list = [msg.timestamp, msg.arbitration_id, msg.dlc. msg.data]
+					arg_list = [msg.timestamp, msg.arbitration_id, msg.dlc, msg.data]
 					print (msg.data)
 					row = ','.join(arg_list)
 					self.logfile.write(row + "\n")
