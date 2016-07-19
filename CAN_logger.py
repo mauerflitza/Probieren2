@@ -31,11 +31,32 @@ class Printer(threading.Thread):
 				if mesg != None:
 					self.logfile.write(str(mesg))
 					self.logfile.write("\n")
+					
+class csvPrinter(threading.Thread):
+	def __init__(self,logfile, end_flag):
+		threading.Thread.__init__(self)
+		self.ende=end_flag
+		self.logfile = logfile
+		
+		self.logfile.write("timestamp, arbitrationid, flags, dlc, data")
+	def run(self): 
+		while not self.ende.isSet():
+			while not q_logs.empty():
+				mesg=q_logs.get()
+#				print(mesg)
+				if mesg != None:
+					row = ','.join([msg.timestamp,
+                        msg.arbitration_id,
+                        msg.flags,
+                        msg.dlc,
+                        msg.data[0],
+						msg.data[1]])
+					self.logfile.write(row + "\n")
 			
-"""
+
 if __name__ == '__main__':
 	end_Flag = threading.Event()
-	logs = open('test', 'w')
+	logs = open('test.csv', 'w')
 	
 	Listen_Thread = Listener(end_Flag)
 	Print_Thread = Printer(logs,end_Flag)
@@ -47,4 +68,3 @@ if __name__ == '__main__':
 	end_Flag.set()	
 	Print_Thread.join()
 	logs.close()
-"""
