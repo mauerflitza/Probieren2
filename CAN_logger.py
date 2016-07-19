@@ -37,7 +37,7 @@ class csvPrinter(threading.Thread):
 		threading.Thread.__init__(self)
 		self.ende=end_flag
 		self.logfile = logfile
-		self.logfile.write("timestamp, arbitrationid, flags, dlc, data")
+		self.logfile.write("timestamp, arbitrationid, dlc, data" + "\n")
 	def run(self): 
 		while not self.ende.isSet():
 			while not q_logs.empty():
@@ -47,11 +47,11 @@ class csvPrinter(threading.Thread):
 					arg_list = [msg.timestamp, msg.arbitration_id, msg.dlc, msg.data]
 					print (msg.data)
 					row = ','.join(map(str,([msg.timestamp,
-                        msg.arbitration_id,
-                        msg.dlc,
-                        msg.data[0],
-			msg.data[1]
-			])))
+                		        msg.arbitration_id,
+		                        msg.dlc,
+		                        msg.data[0],
+					msg.data[1] ]
+					)))
 					self.logfile.write(row + "\n")
 			
 
