@@ -33,11 +33,12 @@ class Printer(threading.Thread):
 					self.logfile.write("\n")
 					
 class csvPrinter(threading.Thread):
-	def __init__(self,logfile, end_flag):
+	def __init__(self,logfile,names, end_flag):
 		threading.Thread.__init__(self)
 		self.ende=end_flag
 		self.logfile = logfile
-		self.logfile.write("timestamp, arbitrationid, dlc, data" + "\n")
+		self.logfile.write(','.join(self.names)
+		self.names=names
 	def run(self): 
 		while not self.ende.isSet():
 			while not q_logs.empty():
@@ -58,9 +59,10 @@ class csvPrinter(threading.Thread):
 if __name__ == '__main__':
 	end_Flag = threading.Event()
 	logs = open('test.csv', 'w')
+	names = ["acc", "temp", "gyro"]
 	
 	Listen_Thread = Listener(end_Flag)
-	Print_Thread = csvPrinter(logs,end_Flag)
+	Print_Thread = csvPrinter(logs,names, end_Flag)
 	
 	Listen_Thread.start()
 	Print_Thread.start()
