@@ -1,6 +1,6 @@
-import threading
-import queue	
-import can
+import threading 
+import queue 
+import can 
 import time
 
 q_logs = queue.Queue()
@@ -37,20 +37,16 @@ class csvPrinter(threading.Thread):
 		threading.Thread.__init__(self)
 		self.ende=end_flag
 		self.logfile = logfile
-		
 		self.logfile.write("timestamp, arbitrationid, flags, dlc, data")
 	def run(self): 
 		while not self.ende.isSet():
 			while not q_logs.empty():
-				mesg=q_logs.get()
+				msg=q_logs.get()
 #				print(mesg)
-				if mesg != None:
-					row = ','.join([msg.timestamp,
-                        msg.arbitration_id,
-                        msg.flags,
-                        msg.dlc,
-                        msg.data[0],
-						msg.data[1]])
+				if msg != None:
+					arg_list = [msg.timestamp, msg.arbitration_id, msg.dlc. msg.data]
+					print (msg.data)
+					row = ','.join(arg_list)
 					self.logfile.write(row + "\n")
 			
 
@@ -59,7 +55,7 @@ if __name__ == '__main__':
 	logs = open('test.csv', 'w')
 	
 	Listen_Thread = Listener(end_Flag)
-	Print_Thread = Printer(logs,end_Flag)
+	Print_Thread = csvPrinter(logs,end_Flag)
 	
 	Listen_Thread.start()
 	Print_Thread.start()
