@@ -37,8 +37,7 @@ class csvPrinter(threading.Thread):
 		threading.Thread.__init__(self)
 		self.ende=end_flag
 		self.logfile = logfile
-		self.logfile.write(','.join(self.names)
-		self.names=names
+		self.logfile.write(','.join(names) + "\n")
 	def run(self): 
 		while not self.ende.isSet():
 			while not q_logs.empty():
