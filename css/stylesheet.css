@@ -1,0 +1,131 @@
+body {
+background-color:#C0C0C0;
+margin:0px;
+}
+
+.btn,.main_btn {
+  background: #a52a2a;
+  background-image: -webkit-linear-gradient(top, #a52a2a, #cd3333);
+  background-image: -moz-linear-gradient(top, #a52a2a, #cd3333);
+  background-image: -ms-linear-gradient(top, #a52a2a, #cd3333);
+  background-image: -o-linear-gradient(top, #a52a2a, #cd3333);
+  background-image: linear-gradient(to bottom, #a52a2a, #cd3333);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 9px 27px 9px 27px;
+  text-decoration: none;
+  margin-top:5px;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+
+.btn:hover {
+  background: #cd3333;
+  background-image: -webkit-linear-gradient(top, #cd3333, #a52a2a);
+  background-image: -moz-linear-gradient(top, #cd3333, #a52a2a);
+  background-image: -ms-linear-gradient(top, #cd3333, #a52a2a);
+  background-image: -o-linear-gradient(top, #cd3333, #a52a2a);
+  background-image: linear-gradient(to bottom, #cd3333, #a52a2a);
+  text-decoration: none;
+}
+
+/*Dunkel*/
+.Main{
+	text-align:center;
+	background-color:#404040;
+	position:relative;
+	padding-top:15px;
+	padding-bottom:70px;
+}
+
+#buttons {
+	padding-top:10px;	
+	padding-bottom:20px;
+}
+
+#buttons_alarm {
+	padding-top:10px;	
+	padding-bottom:20px;
+	visibility:hidden;
+}
+
+.Anzeige{
+	/*float:left;*/
+	display:inline-block;
+	color:white;
+	border-radius:3px;
+	padding: 3em;
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	margin-top:20px;
+	margin-bottom:10px;
+	text-align:center;
+	border: 3px solid red;
+	width:13em;
+	height:100%;
+	background: #9090A0;
+}
+
+
+
+/*Menü zur Kommunikationsauswahl*/
+.menu {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.menuli {
+    float: left;
+}
+
+.menuri {
+    float: right;
+}
+
+
+.menuli a {
+	/*position:relative;*/
+    display: inline-block;
+    color: white;
+	font-size:1.3em;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menuli a:hover {
+    background-color: #111;
+}
+
+
+
+.chart {
+padding: 15px;
+
+display:inline-block;
+}
+
+
+
+
+
+
+#content {
+    position: relative;
+}
+#content img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+
+
