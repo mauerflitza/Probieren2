@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import os
 import cgi, cgitb
 import codecs
@@ -13,19 +12,24 @@ def main(): # NEW except for the call to processInput
     
     # use format of next two lines with YOUR names and default data
 	filedata = form['upload']
-	contents = processInput(numStr1, numStr2)   # process input into a page
-	print(contents)
+	if filedata.file:
+		contents = processInput(filedata.file)   # process input into a page
+		print(contents)
     
-def processInput(numStr1, numStr2):  
+def processInput(file):  
+	sig_num=0
+	sig_list=[]
 	'''Process input parameters and return the final page as a string.'''
-	if filedata.file: #field really is an upload
+	if file: #field really is an upload
 		#codecs, da es sonst bei umlauten fehler gibt
-		dbcfile=codecs.open(filedata.file, 'r', 'iso 8859-1')
 		#msg_list=[{mesg1}{mesg2}{mesg3}{...}]
 		#Messages  has numbered dicts signals in them
-		msg_list = dbcPattern.dbcDataReader(dbcfile)
-		dbcfile.close
-	return createHTML(sig_num, sig_list).format(**locals())
+		msg_list = dbcPattern.dbcDataReader(file)
+		for message in msg_list:
+			for j in range(message['sig_count']):
+				sig_num=sig_num+1
+				sig_list.append(message[j]['sig_name'])
+	return createHTML(sig_num, sig_list)
 	
 def createHTML(sig_num, sig_list):
 	signale=""
@@ -39,10 +43,10 @@ def createHTML(sig_num, sig_list):
 			<button class="dropbtn">Dropdown</button>
 			<div class="dropdown-content">
 			"""
-	for sig in range(signum):
-		signale.append('<a href="#">{sig_nme}</a>\n'.format(sig_list))
-	html_string.append(signale)
-	html_string.append("</div></div></body></html>")
+	for sig_name in sorted(sig_list, key=str.lower):
+		signale+='<a href="#">{sig_name}</a>\n'.format(**locals())
+	html_string+=signale
+	html_string+="</div></div></body></html>"
 	return html_string
 			
 

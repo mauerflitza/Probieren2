@@ -19,9 +19,9 @@ def dbcDataReader(dbcFile):
 	return_list=[]
 	
 	
-	line=file.readline()
-	for line in file:
-		#Regular expressions to find all the important information in the dbc file
+	for line_b in dbcFile:
+		line=line_b.decode("ISO-8859-1")
+		#Regular expressions to find all the important information in the dbc file		
 		match=re.match('BO_ (?P<ID>\d+) (?P<msg_name>\w+): (?P<DLC>[0-8]) \w+', line)
 		match2= re.match('\s*SG_ (?P<sig_name>\w+)\s*:'
 						 '\s*(?P<Startbit>\d+)\|(?P<Length>[0-8]+)@\d(?P<Sign>[+-])'
