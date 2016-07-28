@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/python3
 import cgi   # NEW
 
 def main(): # NEW except for the call to processInput
@@ -28,7 +27,8 @@ def fileToStr(fileName):
     return contents
 
 try:   # NEW
-    print("Content-type: text/html\n\n")   # say generating html
-    main() 
+	print("Content-Type: text/html;charset:UTF-8")   # say generating html
+	print("\n\n")
+	main() 
 except:
     cgi.print_exception()                 # catch and print errors
