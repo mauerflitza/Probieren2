@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 import os
+import os.path
 import cgi, cgitb
 import re
+import pickle
 
 #own packages
 import dbcPattern
@@ -80,7 +82,12 @@ try:   # NEW
 	cgitb.enable()
 	print("Content-Type: text/html;charset:UTF-8")   # say generating html
 	print("\n\n")
-	msg_list=dbc_main() 
+	msg_list=dbc_main()
+	filename=os.path.join('/home/pi/datalogger/loggerconfigs/','testdump.txt')
+	with open(filename, 'wb') as file:
+		pickle.dump(msg_list, file)
+	with open(filename, 'rb') as file:
+		print(pickle.load(file))
 except:
     cgi.print_exception()  # catch and print errors
 	
