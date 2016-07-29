@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import os.path
 import cgi, cgitb
 import re
 import pickle
@@ -14,12 +15,10 @@ def dbc_main(): # NEW except for the call to processInput
     # use format of next two lines with YOUR names and default data
 	filedata = form['upload']
 	if filedata.file:
-		if re.match('\w+\.dbc', form.filename):
-			contents, msg_list = processInput(filedata.file)   # process input into a page
-			print(contents)
-		else: break
+		contents, msg_list = processInput(filedata.file)   # process input into a page
+		print(contents)
 		return msg_list
-    return -1
+	return -1
 def processInput(file):  
 	sig_num=0
 	sig_list=[]
@@ -83,9 +82,12 @@ try:   # NEW
 	cgitb.enable()
 	print("Content-Type: text/html;charset:UTF-8")   # say generating html
 	print("\n\n")
-	msg_list=dbc_main() 
-	with open('testdump', 'wb') as f:
-		pickle.dump(my_list, f)
+	msg_list=dbc_main()
+	filename=os.path.join('/home/pi/datalogger/loggerconfigs/','testdump.txt')
+	with open(filename, 'wb') as file:
+		pickle.dump(msg_list, file)
+	with open(filename, 'rb') as file:
+		print(pickle.load(file))
 except:
     cgi.print_exception()  # catch and print errors
 	
