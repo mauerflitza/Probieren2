@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import os
 import cgi, cgitb
-import codecs
 
 #own packages
 import dbcPattern
@@ -21,7 +20,7 @@ def processInput(file):
 	sig_list=[]
 	'''Process input parameters and return the final page as a string.'''
 	if file: #field really is an upload
-		#codecs, da es sonst bei umlauten fehler gibt
+		
 		#msg_list=[{mesg1}{mesg2}{mesg3}{...}]
 		#Messages  has numbered dicts signals in them
 		msg_list = dbcPattern.dbcDataReader(file)
@@ -33,20 +32,43 @@ def processInput(file):
 	
 def createHTML(sig_num, sig_list):
 	signale=""
+	i=0
 	html_string = """
 	<!DOCTYPE html>
 	
 	<html>
-		<Title>The Time Now</Title>
+		<Title>Logger_Setup</Title>
 		<body>
-		<div class="dropdown">
-			<button class="dropbtn">Dropdown</button>
-			<div class="dropdown-content">
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	        <ul class="nav navbar-nav">
+		        <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Two Column <b class="caret"></b></a>
+		            <ul class="dropdown-menu multi-column columns-2">
+			            <div class="row">
+				            <li class="col-sm-6">
+					            <ul class="multi-column-dropdown">
 			"""
 	for sig_name in sorted(sig_list, key=str.lower):
-		signale+='<a href="#">{sig_name}</a>\n'.format(**locals())
+		signale+='<li><a href="#">{sig_name}</a></li>\n'.format(**locals())
+		i+=1
+		if i>sig_num:
+			break
 	html_string+=signale
-	html_string+="</div></div></body></html>"
+	html_string+="""
+	</li>
+	<li class="col-sm-6">
+	<ul class="multi-column-dropdown">
+	"""
+	for sig_name2 in sorted(sig_list, key=str.lower):
+		signale+='<li><a href="#">{sig_name2}</a></li>\n'.format(**locals())
+	html_string+="</ul></li></div></ul></li></ul></div>"
+	html_string+="""
+	<!-------------------- JS -------------------->
+	<script type="text/javascript" src="js/jQuery.js"></script>
+	<script type="text/javascript" src="js/Dropdown.js"></script>
+	</body>
+	</html> 
+	"""
 	return html_string
 			
 
