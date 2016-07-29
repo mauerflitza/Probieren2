@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 import os
 import cgi, cgitb
+import re
 
 #own packages
 import dbcPattern
 
 
-def main(): # NEW except for the call to processInput
+def dbc_main(): # NEW except for the call to processInput
 	form = cgi.FieldStorage()      # standard cgi script lines to here!
     
     # use format of next two lines with YOUR names and default data
 	filedata = form['upload']
 	if filedata.file:
-		contents = processInput(filedata.file)   # process input into a page
-		print(contents)
-    
+		if re.match('\w+\.dbc', form.filename):
+			contents, msg_list = processInput(filedata.file)   # process input into a page
+			print(contents)
+		else: break
+		return msg_list
+    return -1
 def processInput(file):  
 	sig_num=0
 	sig_list=[]
@@ -28,11 +32,12 @@ def processInput(file):
 			for j in range(message['sig_count']):
 				sig_num=sig_num+1
 				sig_list.append(message[j]['sig_name'])
-	return createHTML(sig_num, sig_list)
+	return createHTML(sig_num, sig_list),msg_list
 	
 def createHTML(sig_num, sig_list):
 	signale=""
 	i=0
+	print(sig_num)
 	html_string = """
 	<!DOCTYPE html>
 	
@@ -51,7 +56,7 @@ def createHTML(sig_num, sig_list):
 	for sig_name in sorted(sig_list, key=str.lower):
 		signale+='<li><a href="#">{sig_name}</a></li>\n'.format(**locals())
 		i+=1
-		if i>sig_num:
+		if i>sig_num/2:
 			break
 	html_string+=signale
 	html_string+="""
@@ -72,11 +77,12 @@ def createHTML(sig_num, sig_list):
 	return html_string
 			
 
-
+#Muss später ins Hauptprogramm kopiert werden
 try:   # NEW
 	cgitb.enable()
 	print("Content-Type: text/html;charset:UTF-8")   # say generating html
 	print("\n\n")
-	main() 
+	msg_list=dbc_main() 
 except:
-    cgi.print_exception()                 # catch and print errors
+    cgi.print_exception()  # catch and print errors
+	
