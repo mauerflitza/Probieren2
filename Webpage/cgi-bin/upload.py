@@ -2,6 +2,7 @@
 import os
 import cgi, cgitb
 import re
+import pickle
 
 #own packages
 import dbcPattern
@@ -83,6 +84,8 @@ try:   # NEW
 	print("Content-Type: text/html;charset:UTF-8")   # say generating html
 	print("\n\n")
 	msg_list=dbc_main() 
+	with open('testdump', 'wb') as f:
+		pickle.dump(my_list, f)
 except:
     cgi.print_exception()  # catch and print errors
 	
