@@ -9,13 +9,27 @@
 		<title>Logger-Setup</title>
 		<link rel="stylesheet" href="css/stylesheet.css">
 		<link rel="stylesheet" type="text/css" href="css/upload/component.css" />
-		<script type="text/javascript" src="Versuche_Download/Data_Websocket.js" </script>
+		<script src="js/jQuery.js"></script>
+		<script src="js/searchlist.js"></script>
 		<script>
-			function add_fields() {
-			var newdiv = document.createElement('div');
-			newdiv.innerHTML = '<span>Log-Signal:	Name:<input type="text">	Sample Rate:<input type="text"></span>';
-			document.getElementById('wrapper').appendChild(newdiv);}
+			function selector(caller){
+				var text = document.createElement('div');
+				var mydiv = document.getElementById('Auflistung');
+				text.setAttribute('id',caller.innerHTML);
+					text.innerHTML='<span>Name:'+ caller.innerHTML +'</span><form action="demo_form.asp" text-align:"center;"> \
+					<input type="text" name="s_rate"><a href=\'#\' onclick=\'removeElement('+text.id+')\'> \
+					<img src="Picture/delete.png" alt="Delete signal" style="width:34px;height:34px;border:0;vertical-align:middle;">\
+					</a></form>';
+					mydiv.appendChild(text);
+			}
 		</script>
+		<script>
+		function removeElement(divNum) {
+			var mydiv = document.getElementById('Auflistung');
+			mydiv.removeChild(divNum);
+		}
+		</script>
+
 	</head>
 <body>
 	<ul class="menu">
@@ -27,11 +41,41 @@
 		</div>
 	</ul>
 	<div class="Main">
-		<input class="buttons" type="button" id="more_fields" onclick="add_fields();" value="Add another signal" />
-			<div class="content" id="wrapper"> 
-				<span>Log-Signal:	Name:<input type="text">	Sample Rate:<input type="text"></span>
-			</div>
+		<div class="signal_list" id="signals">
+			<input class="search" placeholder="Search" />
+			<button class="sort" data-sort="name">
+			Sort by name
+			</button>
+			<ul class="list"></ul>
+		</div>
+		<div class="content-block" id="Auflistung">
+		</div>
 	</div>
+	
+	
+
+
+
+<script>
+var options = {
+  valueNames: [ 'sig_sel' ],
+  item: '<li><p  class="sig_sel" onclick="selector(this);"></p></p></li>'
+};
+
+var values = [
+    {sig_sel: 'acc'},
+    {sig_sel: 'gyro'},
+    {sig_sel: 'acc_y'}];
+
+var signalList = new List('signals', options, values);
+
+
+//EXTREM WICHTIGE FUNKTION FUER MEIN CGI
+signalList.add({
+  sig_sel: "temp",
+});
+</script>
+
 </body>
 </html>
 
