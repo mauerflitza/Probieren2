@@ -254,6 +254,11 @@ text-decoration: none;
 	position: relative;
 }
 
+table,th,td
+{ 
+font-size:15px; 
+color:white;  }
+
 
 
 
