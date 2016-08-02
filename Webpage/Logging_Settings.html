@@ -11,25 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="css/upload/component.css" />
 		<script src="js/jQuery.js"></script>
 		<script src="js/searchlist.js"></script>
-		<script>
-			function selector(caller){
-				var text = document.createElement('div');
-				var mydiv = document.getElementById('Auflistung');
-				text.setAttribute('id',caller.innerHTML);
-					text.innerHTML='<span>Name:'+ caller.innerHTML +'</span><form action="demo_form.asp" text-align:"center;"> \
-					<input type="text" name="s_rate"><a href=\'#\' onclick=\'removeElement('+text.id+')\'> \
-					<img src="Picture/delete.png" alt="Delete signal" style="width:34px;height:34px;border:0;vertical-align:middle;">\
-					</a></form>';
-					mydiv.appendChild(text);
-			}
-		</script>
-		<script>
-		function removeElement(divNum) {
-			var mydiv = document.getElementById('Auflistung');
-			mydiv.removeChild(divNum);
-		}
-		</script>
-
+		<script src="js/Auswahl.js"></script>
 	</head>
 <body>
 	<ul class="menu">
@@ -48,13 +30,17 @@
 			</button>
 			<ul class="list"></ul>
 		</div>
-		<div class="content-block" id="Auflistung">
+		<div class="content-block">
+			<form id="Auflistung" action="demo_form.asp" text-align:"center;"  > 
+			  <table id="Sign_table" style="visibility:hidden;">
+			    <tr>
+				  <th>Name</th>
+				  <th>Sample Rate</th>
+				</tr>
+			  </table>
+			</form>
 		</div>
 	</div>
-	
-	
-
-
 
 <script>
 var options = {
