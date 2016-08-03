@@ -37,43 +37,20 @@ def processInput(file):
 def createHTML(sig_num, sig_list):
 	signale=""
 	i=0
-	print(sig_num)
-	html_string = """
-	<!DOCTYPE html>
-	
-	<html>
-		<Title>Logger_Setup</Title>
-		<body>
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	        <ul class="nav navbar-nav">
-		        <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Two Column <b class="caret"></b></a>
-		            <ul class="dropdown-menu multi-column columns-2">
-			            <div class="row">
-				            <li class="col-sm-6">
-					            <ul class="multi-column-dropdown">
-			"""
+	file=open("Part1.txt")
+	html_string = file.read()
+	file.close()
 	for sig_name in sorted(sig_list, key=str.lower):
-		signale+='<li><a href="#">{sig_name}</a></li>\n'.format(**locals())
-		i+=1
-		if i>sig_num/2:
-			break
-	html_string+=signale
-	html_string+="""
-	</li>
-	<li class="col-sm-6">
-	<ul class="multi-column-dropdown">
-	"""
-	for sig_name2 in sorted(sig_list, key=str.lower):
-		signale+='<li><a href="#">{sig_name2}</a></li>\n'.format(**locals())
-	html_string+="</ul></li></div></ul></li></ul></div>"
-	html_string+="""
-	<!-------------------- JS -------------------->
-	<script type="text/javascript" src="js/jQuery.js"></script>
-	<script type="text/javascript" src="js/Dropdown.js"></script>
-	</body>
-	</html> 
-	"""
+		signale+="{ sig_sel: '%s'}," %(sig_name) 
+#		print(sig_name)
+	html_string+=signale[:-1]
+#	print(html_string)
+	file2=open("Part2.txt")
+	html_string+=file2.read()
+	file2.close()
+	file=open("htmltext.html",'w')
+	file.write(html_string)
+	file.close()
 	return html_string
 			
 
@@ -86,8 +63,6 @@ try:   # NEW
 	filename=os.path.join('/home/pi/datalogger/loggerconfigs/','testdump.txt')
 	with open(filename, 'wb') as file:
 		pickle.dump(msg_list, file)
-	with open(filename, 'rb') as file:
-		print(pickle.load(file))
 except:
     cgi.print_exception()  # catch and print errors
 	
