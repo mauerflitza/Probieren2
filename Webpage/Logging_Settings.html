@@ -8,7 +8,7 @@
 		<link rel="icon" href="Picture/icon.png">
 		<title>Logger-Setup</title>
 		<link rel="stylesheet" href="css/stylesheet.css">
-		<link rel="stylesheet" type="text/css" href="css/upload/component.css" />
+		<link rel="stylesheels t" type="text/css" href="css/upload/component.css" />
 		<script src="js/jQuery.js"></script>
 		<script src="js/searchlist.js"></script>
 		<script src="js/Auswahl.js"></script>
@@ -31,13 +31,18 @@
 			<ul class="list"></ul>
 		</div>
 		<div class="content-block">
-			<form id="Auflistung" action="demo_form.asp" text-align:"center;"  > 
+			<form id="Auflistung" action="cgi-bin/saving.py" onsubmit="saver()" text-align:"center;"  > 
 			  <table id="Sign_table" style="visibility:hidden;">
-			    <tr>
 				  <th>Name</th>
 				  <th>Sample Rate</th>
-				</tr>
+				  <th>Start/Stop</th>
 			  </table>
+			</form>
+			<form id="Auflistung" onsubmit="saver()" text-align:"center;"  > 
+			  <input type="text" name="SampleRates" id="SampleRates" style="visibility:hidden;"/>
+			  <input type="text" name="StartVal" id="StartVal" style="visibility:hidden;"/>
+			  <input type="text" name="webpage" id="webpage" style="visibility:hidden;"/>
+			  <input name="submit_btn" type="submit" value="Submit">
 			</form>
 		</div>
 	</div>
@@ -60,6 +65,7 @@ var signalList = new List('signals', options, values);
 signalList.add({
   sig_sel: "temp",
 });
+
 </script>
 
 </body>
