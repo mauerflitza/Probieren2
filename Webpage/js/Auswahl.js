@@ -4,17 +4,12 @@
 var myFuncCalls=0;
 function selector(caller){
 	var form = document.getElementById('Auflistung');
-	var submit = document.createElement('input');
+	var submit = document.getElementById('submit_btn');
 	var table = document.getElementById('Sign_table');
 	var vorhanden=document.getElementById(caller.innerHTML);
 	if (!vorhanden){
 		if (myFuncCalls<=0){
-			submit.setAttribute('id', 'submit_btn');
-			submit.setAttribute('class', 'Upload');
-			submit.setAttribute('style', 'margin-top: 15px;');
-			submit.setAttribute('value', 'Submit');
-			submit.setAttribute('type', 'Submit');
-			form.appendChild(submit);}
+			submit.setAttribute('style', 'visibility:visible;');}
 		table.style.visibility="visible";
 		row = table.insertRow(-1);
 		var cell1 = row.insertCell(0);
@@ -31,7 +26,7 @@ function selector(caller){
 		cell4.style.visibility='hidden';
 		cell4.innerHTML = '<input type="text" name="start" class= "startcon">';
 		cell5.innerHTML = '<a href=\'#\' onclick=\'deleteRow(this)\'> \
-		<img src="Picture/delete.png" alt="Delete signal" style="width:34px;height:34px;border:0;vertical-align:middle;"></a>';}
+		<img src="../Picture/delete.png" alt="Delete signal" style="width:34px;height:34px;border:0;vertical-align:middle;"></a>';}
 	myFuncCalls++;
 }
 //*************************************************

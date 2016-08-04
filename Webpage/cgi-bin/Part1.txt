@@ -5,13 +5,13 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" href="Picture/icon.png">
+		<link rel="icon" href="../Picture/icon.png">
 		<title>Logger-Setup</title>
-		<link rel="stylesheet" href="css/stylesheet.css">
-		<link rel="stylesheet" type="text/css" href="css/upload/component.css" />
-		<script src="js/jQuery.js"></script>
-		<script src="js/searchlist.js"></script>
-		<script src="js/Auswahl.js"></script>
+		<link rel="stylesheet" href="../css/stylesheet.css">
+		<link rel="stylesheet" type="text/css" href="../css/upload/component.css" />
+		<script src="../js/jQuery.js"></script>
+		<script src="../js/searchlist.js"></script>
+		<script src="../js/Auswahl.js"></script>
 	</head>
 <body>
 	<ul class="menu">
@@ -19,7 +19,7 @@
 		<li class="menuli"><a class="link" href="Logging_Settings.html">Logger-Settings</a></li>
 		<li class="menuli"><a class="link" href="Debug.html">Debug</a></li>
 		<div class="menuri">
-			<img src="Picture/LogoBosch.png" style="width:200px;"/>
+			<img src="../Picture/LogoBosch.png" style="width:200px;"/>
 		</div>
 	</ul>
 	<div class="Main">
@@ -37,12 +37,13 @@
 				  <th>Sample Rate</th>
 				  <th>Start/Stop</th>
 			  </table>
+			  <input id="submit_btn" class="Upload" style="margin-top:15px; visibility:hidden;" value="submit" type="Submit">
 			</form>
-			<form id="Auflistung" action="cgi-bin/saving.py" onsubmit="saver()" text-align:"center;"  > 
+			<form id="Save" onsubmit="saver() "method="post" action="saving.py" text-align:"center;"  > 
 			  <input type="text" name="SampleRates" id="SampleRates" style="visibility:hidden;"/>
 			  <input type="text" name="StartVal" id="StartVal" style="visibility:hidden;"/>
 			  <input type="text" name="webpage" id="webpage" style="visibility:hidden;"/>
-			  <input name="submit_btn" type="submit" value="Submit">
+			  <input name="submit_bttn" type="submit" value="Submit">
 			</form>
 		</div>
 	</div>
