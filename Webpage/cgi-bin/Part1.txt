@@ -47,8 +47,7 @@
 			</form>
 		</div>
 	</div>
-<!-- Breackpoint-->
-<script>
+<script><!-- Breackpoint-->
 var options = {
   valueNames: [ 'sig_sel' ],
   item: '<li><p  class="sig_sel" onclick="selector(this);"></p></p></li>'
