@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+	
+      <script type="text/javascript">
+ws = new WebSocket("ws://127.0.0.1:8888");
+ws.onmessage = function(entry) {
+	console.log(entry.data);
+
+};
+
+ws.onclose = function(entry) { 
+	console.log("Connection closed");
+}
+ws.onopen = function(evt) { 
+console.log("Connection open ...");
+}
+      </script>
+		
+   </head>
+   <body>
+   
+      <div id="sse">
+         <a href="javascript:WebSocketTest()">Run WebSocket</a>
+      </div>
+      
+   </body>
+</html>
