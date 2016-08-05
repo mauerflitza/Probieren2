@@ -84,6 +84,7 @@ body {
 	width:13em;
 	height:100%;
 	background: #9090A0;
+	vertical-align:top; 
 }
 
 
@@ -250,15 +251,30 @@ text-decoration: none;
 	box-sizing: border-box;
 	color: #555;
 	flex: 1 1 0;
+	width:1050px;
 	padding: 30px;
 	position: relative;
+	vertical-align:top;
 }
 
 table,th,td
 { 
 font-size:15px; 
 color:white;  }
+table tr:hover {
+	background-color:#6a6a48;
+	border-color:#6a6a48;
+}
+table thead:hover {
+	background-color:#404040;
+}
 
+.Disp_table {
+border:1px solid #000
+}
 
+.Disp_table td,th {
+border:none;
+}
 
 
